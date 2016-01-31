@@ -4,6 +4,29 @@ import HomePanel from './homepanel.jsx';
 import OptionsPanel from './optionspanel.jsx';
 
 export default class Game extends React.Component {
+	constructor(props) {
+		super(props);
+		
+		this.state = {
+			board: {
+				width: 2,
+				height: 2,
+				blocks: []
+			}
+		};
+		
+		this.state.board.blocks = this.createBlocks(this.state.board.width, this.state.board.height);
+	}
+	
+	createBlocks(width, height) {
+		var blocks = [];
+		
+		for(var i=0; i<width*height; i++) {
+			blocks.push({});
+		}
+		
+		return blocks;
+	}
 	render() {
 		return (
 			<div>
@@ -13,7 +36,7 @@ export default class Game extends React.Component {
 				</ul>
 				<div className="tab-content">
 					<div role="tabpanel" className="tab-pane active" id="home">
-						<HomePanel />
+						<HomePanel board={this.state.board}/>
 					</div>
 					<div role="tabpanel" className="tab-pane" id="options">
 						<OptionsPanel />

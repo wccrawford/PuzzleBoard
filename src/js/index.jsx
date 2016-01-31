@@ -9,6 +9,8 @@ require('file?name=js/[name].[ext]!bootstrap3/dist/js/bootstrap.min.js');
 require('file?name=css/[name].[ext]!bootstrap3/dist/css/bootstrap.min.css');
 require('file?name=css/[name].[ext]!bootstrap3/dist/css/bootstrap-theme.min.css');
 
+require('../scss/style.scss');
+
 import Game from './game.jsx';
 
 ReactDom.render(

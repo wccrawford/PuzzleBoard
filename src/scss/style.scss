@@ -1,0 +1,92 @@
+$blockSize: 5em;
+$lineWidth: 2.5em;
+
+body {
+    background: white;
+}
+
+.board {
+    border: 0;
+    margin: $lineWidth;
+    padding: 0;
+        
+    
+    .pathSegment {
+        background: gray;
+        border: 0;
+        margin: 0;
+        padding: 0;
+        line-height: 0;
+        border: 0px solid black;
+        border-radius: ($lineWidth / 2);
+        z-index: 1;
+        
+        &.active {
+            background: black;
+        }
+        
+        &.vertical {
+            width: $lineWidth;
+            height: $blockSize + ($lineWidth * 2);
+            position: absolute;
+            top: 0 - ($lineWidth);
+            left: 0;
+        }
+        
+        &.horizontal {
+            width: $blockSize + ($lineWidth * 2);
+            height: $lineWidth;
+            position: absolute;
+            top: 0;
+            left: 0 - ($lineWidth);
+        }
+    }
+    
+    .row {
+        border: 0;
+        margin: 0;
+        padding: 0;
+        line-height: 0;
+    }
+    
+    .line {
+        border: 0;
+        margin: 0;
+        padding: 0;
+        line-height: 0;
+        position: relative;
+        display: inline-block;
+        
+        &.vertical {
+            width: $lineWidth;
+            height: $blockSize;
+        }
+        
+        &.horizontal {
+            width: $blockSize;
+            height: $lineWidth;
+        }
+    }
+    
+    .junction {
+        border: 0;
+        margin: 0;
+        padding: 0;
+        line-height: 0;
+        position: relative;
+        display: inline-block;
+        width: $lineWidth;
+        height: $lineWidth;
+    }
+    
+    .block {
+        border: 0;
+        margin: 0;
+        padding: 0;
+        line-height: 0;
+        position: relative;
+        display: inline-block;
+        width: $blockSize;
+        height: $blockSize;
+    }
+}
