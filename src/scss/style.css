@@ -15,7 +15,8 @@ body {
     border-radius: 1.25em;
     z-index: 1; }
     .board .pathSegment.active {
-      background: black; }
+      background: black;
+      z-index: 2; }
     .board .pathSegment.vertical {
       width: 2.5em;
       height: 10em;

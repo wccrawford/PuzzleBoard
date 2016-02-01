@@ -23,6 +23,7 @@ body {
         
         &.active {
             background: black;
+            z-index: 2;
         }
         
         &.vertical {

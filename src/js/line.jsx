@@ -12,9 +12,13 @@ export default class Line extends React.Component {
             this.props.orientation || 'horizontal'
             ];
             
+        if(this.props.data.active) {
+            pathClasses.push('active');
+        }
+            
         return (
             <div className={lineClasses.join(' ')}>
-                <div className={pathClasses.join(' ')}></div>
+                <div className={pathClasses.join(' ')} onClick={this.props.clickPath}></div>
             </div>
             );
     }

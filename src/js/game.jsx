@@ -16,17 +16,48 @@ export default class Game extends React.Component {
 		};
 		
 		this.state.board.blocks = this.createBlocks(this.state.board.width, this.state.board.height);
+		
+		this.state.board.blocks[0].junctions[0].type = 'start';
+		this.state.board.blocks[3].junctions[3].type = 'end';
 	}
 	
 	createBlocks(width, height) {
 		var blocks = [];
 		
 		for(var i=0; i<width*height; i++) {
-			blocks.push({});
+			blocks.push({
+				active: false,
+				type: 'blank',
+				paths: [
+					{active: false, type: 'normal'},
+					{active: false, type: 'normal'},
+					{active: false, type: 'normal'},
+					{active: false, type: 'normal'}
+					],
+				junctions: [
+					{type: 'normal'},
+					{type: 'normal'},
+					{type: 'normal'},
+					{type: 'normal'}
+					]
+			});
 		}
 		
 		return blocks;
 	}
+	
+	updateBlock(index, data) {
+		var board = this.state.board,
+			block = board.blocks[index];
+		
+		Object.assign(block, data);
+		board.blocks[index] = block;
+		
+		this.setState({
+			board: board
+		});
+	}
+	
 	render() {
 		return (
 			<div>
@@ -36,7 +67,7 @@ export default class Game extends React.Component {
 				</ul>
 				<div className="tab-content">
 					<div role="tabpanel" className="tab-pane active" id="home">
-						<HomePanel board={this.state.board}/>
+						<HomePanel board={this.state.board} updateBlock={this.updateBlock.bind(this)}/>
 					</div>
 					<div role="tabpanel" className="tab-pane" id="options">
 						<OptionsPanel />
