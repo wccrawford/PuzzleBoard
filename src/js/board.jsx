@@ -48,10 +48,10 @@ export default class Board extends React.Component {
                     var index = (h*this.props.data.height) + w,
                         block = this.props.data.blocks[index];
                         
-                    row.push(<Junction key={'junction_'+(h+1)+'_'+w}/>);
+                    row.push(<Junction key={'junction_'+(h+1)+'_'+w} data={block.junctions[2]}/>);
                     row.push(<Line orientation="horizontal" key={'line_h_'+(w+1)+'_'+h} clickPath={this.clickPath.bind(this, index, 3)} data={block.paths[3]} />);
                     if(w == this.props.data.width-1) {
-                        row.push(<Junction key={'junction_'+(h+1)+'_'+(w+1)}/>);
+                        row.push(<Junction key={'junction_'+(h+1)+'_'+(w+1)} data={block.junctions[3]}/>);
                     }
                 }
             pieces.push(<div className="row" key={'row'+h+'_2'}>{row}</div>);
