@@ -12,50 +12,46 @@ export default class Board extends React.Component {
         this.props.updateBlock(blockIndex, block);
     }
     
+    getNeighbors(x, y) {
+        var neighbors = [];
+        
+        neighbors.push(this.getBlock(x, y-1));
+        neighbors.push(this.getBlock(x-1, y));
+        neighbors.push(this.getBlock(x+1, y));
+        neighbors.push(this.getBlock(x, y+1));
+        
+        return neighbors;
+    }
+    
+    getBlock(x, y) {
+        if(x >= 0 && y >= 0 && x < this.props.data.width && y < this.props.data.height) {
+            var index = (y * this.props.data.height) + x;
+            return this.props.data.blocks[index];
+        }
+        
+        return null;
+    }
+    
     render() {
         var pieces = [];
-        
         for(var h=0; h<this.props.data.height; h++) {
             var row = [];
+            
             for(var w=0; w<this.props.data.width; w++) {
                 var index = (h*this.props.data.height) + w,
-                    block = this.props.data.blocks[index];
-                    
-                row.push(<Junction key={'junction_'+h+'_'+w} data={block.junctions[0]}/>);
-                row.push(<Line orientation="horizontal" key={'line_h_'+w+'_'+h} clickPath={this.clickPath.bind(this, index, 0)} data={block.paths[0]} />);
-                if(w == this.props.data.width-1) {
-                    row.push(<Junction key={'junction_'+h+'_'+(w+1)} data={block.junctions[1]}/>);
-                }
+                    block = this.props.data.blocks[index],
+                    neighbors = this.getNeighbors(w, h);
+                
+                row.push(
+                    <Block key={'block_'+index} index={index} data={block} clickPath={this.clickPath.bind(this)} neighbors={neighbors}/>
+                    );
             }
-            pieces.push(<div className="row" key={'row'+h+'_0'}>{row}</div>);
             
-            row=[];
-            for(var w=0; w<this.props.data.width; w++) {
-                var index = (h*this.props.data.height) + w,
-                    block = this.props.data.blocks[index];
-                    
-                row.push(<Line orientation="vertical" key={'line_v_'+w+'_'+h} clickPath={this.clickPath.bind(this, index, 1)} data={block.paths[1]} />);
-                row.push(<Block key={'block'+w+'_'+h}/>);
-                if(w == this.props.data.width-1) {
-                    row.push(<Line orientation="vertical" key={'line_v_'+w+'_'+(h+1)} clickPath={this.clickPath.bind(this, index, 2)} data={block.paths[2]} />);
-                }
-            }
-            pieces.push(<div className="row" key={'row'+h+'_1'}>{row}</div>);
-            
-            if(h == this.props.data.height-1) {
-                row=[];
-                for(var w=0; w<this.props.data.width; w++) {
-                    var index = (h*this.props.data.height) + w,
-                        block = this.props.data.blocks[index];
-                        
-                    row.push(<Junction key={'junction_'+(h+1)+'_'+w} data={block.junctions[2]}/>);
-                    row.push(<Line orientation="horizontal" key={'line_h_'+(w+1)+'_'+h} clickPath={this.clickPath.bind(this, index, 3)} data={block.paths[3]} />);
-                    if(w == this.props.data.width-1) {
-                        row.push(<Junction key={'junction_'+(h+1)+'_'+(w+1)} data={block.junctions[3]}/>);
-                    }
-                }
-            pieces.push(<div className="row" key={'row'+h+'_2'}>{row}</div>);
-            }
+            pieces.push(
+                <div className="row" key={'row_'+h}>
+                    {row}
+                </div>
+                );
         }
         
         return (

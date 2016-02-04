@@ -30,7 +30,7 @@ body {
             width: $lineWidth;
             height: $blockSize + ($lineWidth * 2);
             position: absolute;
-            top: 0 - ($lineWidth);
+            top: 0;
             left: 0;
         }
         
@@ -39,7 +39,7 @@ body {
             height: $lineWidth;
             position: absolute;
             top: 0;
-            left: 0 - ($lineWidth);
+            left: 0;
         }
     }
     
@@ -55,16 +55,16 @@ body {
         margin: 0;
         padding: 0;
         line-height: 0;
-        position: relative;
+        position: absolute;
         display: inline-block;
         
         &.vertical {
             width: $lineWidth;
-            height: $blockSize;
+            height: $blockSize + ($lineWidth * 2);
         }
         
         &.horizontal {
-            width: $blockSize;
+            width: $blockSize + ($lineWidth * 2);
             height: $lineWidth;
         }
     }
@@ -74,10 +74,29 @@ body {
         margin: 0;
         padding: 0;
         line-height: 0;
-        position: relative;
+        position: absolute;
         display: inline-block;
         width: $lineWidth;
         height: $lineWidth;
+        
+        .start {
+            border: 0;
+            margin: 0;
+            padding: 0;
+            line-height: 0;
+            background-color: grey;
+            position: absolute;
+            top: 0 - ($lineWidth / 2);
+            left: 0 - ($lineWidth / 2);
+            height: $lineWidth * 2;
+            width: $lineWidth * 2;
+            border-radius: $lineWidth;
+        }
+        
+        &.active .start {
+            background-color: black;
+            z-index: 2;
+        }
     }
     
     .block {
@@ -87,7 +106,47 @@ body {
         line-height: 0;
         position: relative;
         display: inline-block;
-        width: $blockSize;
-        height: $blockSize;
+        width: $blockSize + $lineWidth;
+        height: $blockSize + $lineWidth;
+        
+        .junction_0 {
+            top: 0;
+            left: 0;
+        }
+        
+        .junction_1 {
+            top: 0;
+            left: $blockSize + $lineWidth;
+        }
+        
+        .junction_2 {
+            top: $blockSize + $lineWidth;
+            left: 0;
+        }
+        
+        .junction_3 {
+            top: $blockSize + $lineWidth;
+            left: $blockSize + $lineWidth;
+        }
+        
+        .line_0 {
+            top: 0;
+            left: 0;
+        }
+        
+        .line_1 {
+            top: 0;
+            left: 0;
+        }
+        
+        .line_2 {
+            top: 0;
+            left: $lineWidth + $blockSize;
+        }
+        
+        .line_3 {
+            top: $lineWidth + $blockSize;
+            left: 0;
+        }
     }
 }

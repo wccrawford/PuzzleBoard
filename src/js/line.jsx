@@ -2,14 +2,17 @@ import React from 'react';
 
 export default class Line extends React.Component {
     render() {
+        var orientation = this.props.index == 0 || this.props.index == 3 ? 'horizontal' : 'vertical';
         var lineClasses = [
             'line',
-            this.props.orientation || 'horizontal'
+            'line_'+this.props.index,
+            orientation
             ];
             
         var pathClasses = [
             'pathSegment',
-            this.props.orientation || 'horizontal'
+            'pathSegment_'+this.props.index,
+            orientation
             ];
             
         if(this.props.data.active) {
